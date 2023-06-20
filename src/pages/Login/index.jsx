@@ -1,8 +1,9 @@
-import { Icon, Input, View } from "native-base";
+import { Checkbox, Icon, Input, Text, View } from "native-base";
 import React from "react";
 import Logo from "../../assets/icon/Logo.jsx";
 import MyInput from "../../components/MyInput/index.jsx";
 import { AntDesign, Entypo } from "@expo/vector-icons";
+import MyButton from "../../components/MyButton/index.jsx";
 const Login = () => {
   return (
     <View
@@ -15,7 +16,7 @@ const Login = () => {
       backgroundColor="#FEEADF"
     >
       <Logo />
-      <View width="70%" gap="20px">
+      <View width="80%" gap="20px">
         <MyInput
           startIcon={<AntDesign name="user" />}
           fontSize="16px"
@@ -29,6 +30,7 @@ const Login = () => {
           placeholder="Password"
           type="password"
         />
+        <MyButton text="Sign in" borderRadius="90px" />
       </View>
     </View>
   );
