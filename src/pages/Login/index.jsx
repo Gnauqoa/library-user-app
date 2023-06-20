@@ -4,6 +4,7 @@ import Logo from "../../assets/icon/Logo.jsx";
 import MyInput from "../../components/MyInput/index.jsx";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import MyButton from "../../components/MyButton/index.jsx";
+import MyCheckBox from "../../components/MyCheckBox/index.jsx";
 const Login = () => {
   return (
     <View
@@ -30,6 +31,9 @@ const Login = () => {
           placeholder="Password"
           type="password"
         />
+        <View flexDirection="row">
+          <MyCheckBox label="Remember me" />
+        </View>
         <MyButton text="Sign in" borderRadius="90px" />
       </View>
     </View>
