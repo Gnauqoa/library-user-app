@@ -15,6 +15,7 @@ import { setLoginStatus } from "../../reducers/loginStatusReducer.js";
 import { storeUser } from "../../reducers/userReducer.js";
 
 const Login = ({ navigation }) => {
+  const loginStatus = useSelector((state) => state.loginStatus);
   const [formValue, setFormValue] = useState({
     email: "quang@gmail.com",
     password: "Ledangquang109",

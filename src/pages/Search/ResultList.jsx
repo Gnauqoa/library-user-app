@@ -25,7 +25,7 @@ const ResultItem = ({
   return (
     <View
       borderRadius="12px"
-      backgroundColor="#99c7d4"
+      backgroundColor="#b4d8bf"
       p="8px"
       flexDirection="row"
       gap="12px"

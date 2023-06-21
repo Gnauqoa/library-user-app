@@ -37,8 +37,8 @@ export const validateToken = (token) => {
   return Date.now() < decoded.exp * 1000;
 };
 
-export const getAccessTokenFromRefreshToken = () => {
-  const refreshToken = getRefreshToken();
+export const getAccessTokenFromRefreshToken = async () => {
+  const refreshToken = await getRefreshToken();
   if (!validateToken(refreshToken))
     return Promise.reject({ data: { error: "invalid_refresh_token" } });
   return axiosForLibraryAPI

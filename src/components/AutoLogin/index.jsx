@@ -27,7 +27,7 @@ const AutoLogin = () => {
     if (validateToken(await getRefreshToken())) {
       if (!validateToken(await getAccessToken())) {
         console.log("get new access_token");
-        await getAccessTokenFromRefreshToken()
+        getAccessTokenFromRefreshToken()
           .then((res) => {
             isLogin = true;
             getCurrentUser().then((res) => dispatch(storeUser(res.data.data)));
@@ -62,7 +62,6 @@ const AutoLogin = () => {
   };
   useEffect(() => {
     login();
-    console.log(loginStatus);
   }, [loginStatus]);
 };
 
