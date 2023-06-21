@@ -4,13 +4,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./src/pages/Login/index";
 import Register from "./src/pages/Register";
+import { REACT_APP_API_URL } from "@env";
+
+console.log(REACT_APP_API_URL);
 const config = {
   useSystemColorMode: false,
   initialColorMode: "dark",
 };
-
 const Stack = createNativeStackNavigator();
-export const theme = extendTheme({ config });
 
 export default function App() {
   return (
@@ -29,3 +30,4 @@ export default function App() {
     </NativeBaseProvider>
   );
 }
+export const theme = extendTheme({ config });
