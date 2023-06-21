@@ -9,9 +9,15 @@ const MyInput = ({
   iconSize = 7,
   label,
   flex,
+  name,
+  value,
+  onChange,
   ...props
 }) => {
   const [show, setShow] = useState(false);
+  const handleChange = (value) => {
+    onChange({ name, value });
+  };
   return (
     <View gap="4px" width="100%" flex={flex}>
       {label && (
@@ -20,6 +26,7 @@ const MyInput = ({
         </Text>
       )}
       <Input
+        onChangeText={handleChange}
         padding="12px 20px"
         borderColor="#154651"
         _focus={{ borderColor: "#154651" }}

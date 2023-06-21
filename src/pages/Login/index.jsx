@@ -1,13 +1,30 @@
-import { Checkbox, Icon, Input, Pressable, Text, View } from "native-base";
-import React from "react";
+import { Modal, Pressable, Text, View, useToast } from "native-base";
+import React, { useState } from "react";
 import Logo from "../../assets/icon/Logo.jsx";
 import MyInput from "../../components/MyInput/index.jsx";
-import { AntDesign, Entypo, MaterialIcons } from "@expo/vector-icons";
+import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import MyButton from "../../components/MyButton/index.jsx";
 import MyCheckBox from "../../components/MyCheckBox/index.jsx";
 import { TouchableOpacity } from "react-native";
+import { login } from "../../services/auth.js";
+import useAPI from "../../hooks/useApi.jsx";
+import BackDropProcess from "../../components/BackDropProcess/index.jsx";
+import useCustomToast from "../../hooks/useCustomToast.jsx";
 
 const Login = ({ navigation }) => {
+  const [formValue, setFormValue] = useState({ email: "", password: "" });
+  const loginRequest = useAPI({ queryFn: login });
+  const toast = useCustomToast();
+  const handleChange = ({ name, value }) => {
+    setFormValue((prev) => ({ ...prev, [name]: value }));
+  };
+  const handleLogin = () => {
+    console.log("run");
+    loginRequest
+      .run(formValue)
+      .then((res) => {})
+      .catch((err) => {});
+  };
   return (
     <View
       width="100%"
@@ -19,12 +36,16 @@ const Login = ({ navigation }) => {
       backgroundColor="#FEEADF"
       position="relative"
     >
+      <BackDropProcess open={loginRequest.loading} />
       <Text fontSize={32} fontWeight={700} color="#053B47" pb="20px">
         TR Library
       </Text>
       <Logo />
       <View width="80%" gap="20px">
         <MyInput
+          value={formValue.email}
+          name="email"
+          onChange={handleChange}
           label="Email"
           startIcon={<MaterialIcons name="email" />}
           fontSize="16px"
@@ -32,6 +53,9 @@ const Login = ({ navigation }) => {
           placeholder="quanglng@gmail.com"
         />
         <MyInput
+          value={formValue.password}
+          name="password"
+          onChange={handleChange}
           label="Password"
           startIcon={<Entypo name="key" />}
           fontSize="16px"
@@ -47,24 +71,29 @@ const Login = ({ navigation }) => {
             </Text>
           </Pressable>
         </View>
-        <MyButton padding="8px 12px" text="Sign in" borderRadius="90px" />
-      </View>
-      <View
-        position="absolute"
-        bottom={"5%"}
-        right={"10%"}
-        alignItems="flex-end"
-        display="flex"
-        flexDirection="column"
-      >
-        <Text fontSize={11} fontWeight={400} color="#053B47">
-          Don't have account?
-        </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-          <Text fontSize={17} fontWeight={500} color="#053B47">
-            Sign up
+        <MyButton
+          onPress={handleLogin}
+          padding="8px 12px"
+          text="Sign in"
+          borderRadius="90px"
+          mb="auto"
+        />
+        <View
+          ml="auto"
+          alignItems="flex-end"
+          justifyContent="flex-end"
+          display="flex"
+          flexDirection="column"
+        >
+          <Text fontSize={11} fontWeight={400} color="#053B47">
+            Don't have account?
           </Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <Text fontSize={17} fontWeight={500} color="#053B47">
+              Sign up
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
