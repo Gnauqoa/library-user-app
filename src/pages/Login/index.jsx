@@ -1,4 +1,4 @@
-import { Modal, Pressable, Text, View, useToast } from "native-base";
+import { Pressable, Text, View } from "native-base";
 import React, { useState } from "react";
 import Logo from "../../assets/icon/Logo.jsx";
 import MyInput from "../../components/MyInput/index.jsx";
@@ -10,19 +10,29 @@ import { login } from "../../services/auth.js";
 import useAPI from "../../hooks/useApi.jsx";
 import BackDropProcess from "../../components/BackDropProcess/index.jsx";
 import useCustomToast from "../../hooks/useCustomToast.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoginStatus } from "../../reducers/loginStatusReducer.js";
+import { storeUser } from "../../reducers/userReducer.js";
 
 const Login = ({ navigation }) => {
-  const [formValue, setFormValue] = useState({ email: "", password: "" });
+  const [formValue, setFormValue] = useState({
+    email: "quang@gmail.com",
+    password: "Ledangquang109",
+  });
   const loginRequest = useAPI({ queryFn: login });
   const toast = useCustomToast();
+  const dispatch = useDispatch();
   const handleChange = ({ name, value }) => {
     setFormValue((prev) => ({ ...prev, [name]: value }));
   };
   const handleLogin = () => {
-    console.log("run");
     loginRequest
       .run(formValue)
-      .then((res) => {})
+      .then((res) => {
+        dispatch(storeUser(res.data.data));
+        dispatch(setLoginStatus({ isChecking: false, isLogin: true }));
+        toast.success("Login success");
+      })
       .catch((err) => {});
   };
   return (
@@ -36,7 +46,7 @@ const Login = ({ navigation }) => {
       backgroundColor="#FEEADF"
       position="relative"
     >
-      <BackDropProcess open={loginRequest.loading} />
+      <BackDropProcess open={loginRequest.loading || loginStatus.isChecking} />
       <Text fontSize={32} fontWeight={700} color="#053B47" pb="20px">
         TR Library
       </Text>

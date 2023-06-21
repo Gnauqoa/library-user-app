@@ -48,7 +48,7 @@ export const getRememberMe = async () =>
 export const removeRememberMe = async () =>
   await AsyncStorage.removeItem(REMEMBER_ME_NAME);
 
-export const clearTokens = () => {
-  removeRefreshToken();
-  removeAccessToken();
+export const clearTokens = async () => {
+  await removeRefreshToken();
+  await removeAccessToken();
 };

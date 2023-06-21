@@ -72,12 +72,16 @@ export const login = (payload) => {
       data: payload,
       query: "123",
     })
-    .then((response) => {
+    .then(async (response) => {
       axiosForLibraryAPI.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${response.data.data.access_token}`;
-      saveRefreshToken(response.data.data.refresh_token);
-      saveAccessToken(response.data.data.access_token);
+      console.log(
+        "Here:",
+        axiosForLibraryAPI.defaults.headers.common["Authorization"]
+      );
+      await saveRefreshToken(response.data.data.refresh_token);
+      await saveAccessToken(response.data.data.access_token);
       return getCurrentUser();
     });
 };
