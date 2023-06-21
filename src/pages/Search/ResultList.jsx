@@ -10,7 +10,7 @@ const ResultList = ({ items }) => {
       data={items}
       renderItem={({ item }) => <ResultItem {...item} />}
       keyExtractor={(item) => item.id}
-    ></FlatList>
+    />
   );
 };
 

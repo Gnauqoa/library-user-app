@@ -3,7 +3,7 @@ import { NativeBaseProvider, extendTheme } from "native-base";
 import { Provider } from "react-redux";
 import { store } from "./src/reducers/store";
 import AutoLogin from "./src/components/AutoLogin";
-import Routers from "./src/Routers";
+import Routers from "./src/routers";
 
 const config = {
   useSystemColorMode: false,

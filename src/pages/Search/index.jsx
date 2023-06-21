@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native";
 import SearchBar from "./SearchBar";
 import ResultList from "./ResultList";
+import MyPagination from "../../components/MyPagination";
 
 const Search = () => {
   const [result, setResult] = useState({ items: [], page: 0, current_page: 0 });
+  const [page, setPage] = useState(1);
   return (
     <SafeAreaView>
       <View
@@ -14,7 +16,6 @@ const Search = () => {
         py="32px"
         px="20px"
         gap="16px"
-        display="flex"
         flexDirection="column"
         backgroundColor="#FEEADF"
         position="relative"
@@ -24,6 +25,12 @@ const Search = () => {
         </Text>
         <SearchBar setResult={setResult} />
         <ResultList items={result.items} />
+        <MyPagination
+          name={"search"}
+          current_page={page}
+          total_pages={20}
+          onChange={setPage}
+        />
       </View>
     </SafeAreaView>
   );
