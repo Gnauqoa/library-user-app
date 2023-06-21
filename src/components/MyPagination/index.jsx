@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Button, FlatList, Icon, Text, View } from "native-base";
+import { FlatList, Icon, Text, View } from "native-base";
 import React from "react";
 import { TouchableOpacity } from "react-native";
 
@@ -17,9 +17,12 @@ const MyPagination = ({ total_pages, name, current_page, onChange }) => {
       justifyContent={"center"}
       gap="8px"
     >
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => onChange(current_page - 1)}
+        disabled={current_page === 1}
+      >
         <Icon
-          color="#053B47"
+          color={current_page === 1 ? "#CECCD2" : "#053B47"}
           size="30px"
           as={<Ionicons name="md-arrow-back-circle-outline" />}
         />
@@ -44,9 +47,12 @@ const MyPagination = ({ total_pages, name, current_page, onChange }) => {
           />
         )}
       />
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => onChange(current_page + 1)}
+        disabled={current_page === total_pages}
+      >
         <Icon
-          color="#053B47"
+          color={current_page === total_pages ? "#CECCD2" : "#053B47"}
           size="30px"
           as={<Ionicons name="md-arrow-forward-circle-outline" />}
         />

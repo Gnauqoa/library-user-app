@@ -1,20 +1,23 @@
 import { AntDesign } from "@expo/vector-icons";
 import { Icon, Input, View } from "native-base";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import useAPI from "../../hooks/useApi";
 import BackDropProcess from "../../components/BackDropProcess";
 import { searchBook } from "../../services/search";
 
-const SearchBar = ({ setResult, result }) => {
+const SearchBar = ({ setResult, current_page }) => {
   const [name, setName] = useState("");
   const searchRequest = useAPI({ queryFn: (payload) => searchBook(payload) });
   const handleSearch = () => {
     searchRequest
-      .run({ name })
+      .run({ name, page: current_page, per_page: 5 })
       .then((res) => setResult(res))
       .catch((err) => {});
   };
+  useEffect(() => {
+    if (searchRequest.isFetched) handleSearch();
+  }, [current_page]);
   return (
     <View
       gap="8px"

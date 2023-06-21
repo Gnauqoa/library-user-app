@@ -6,7 +6,11 @@ import ResultList from "./ResultList";
 import MyPagination from "../../components/MyPagination";
 
 const Search = () => {
-  const [result, setResult] = useState({ items: [], page: 0, current_page: 0 });
+  const [result, setResult] = useState({
+    items: [],
+    total_pages: 0,
+    current_page: 0,
+  });
   const [page, setPage] = useState(1);
   return (
     <SafeAreaView>
@@ -23,12 +27,12 @@ const Search = () => {
         <Text fontSize="25px" fontWeight={700} color="#053B47">
           Search
         </Text>
-        <SearchBar setResult={setResult} />
+        <SearchBar current_page={page} setResult={setResult} />
         <ResultList items={result.items} />
         <MyPagination
           name={"search"}
           current_page={page}
-          total_pages={20}
+          total_pages={result.total_pages}
           onChange={setPage}
         />
       </View>
