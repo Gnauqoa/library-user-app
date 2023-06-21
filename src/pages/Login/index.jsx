@@ -2,11 +2,12 @@ import { Checkbox, Icon, Input, Pressable, Text, View } from "native-base";
 import React from "react";
 import Logo from "../../assets/icon/Logo.jsx";
 import MyInput from "../../components/MyInput/index.jsx";
-import { AntDesign, Entypo } from "@expo/vector-icons";
+import { AntDesign, Entypo, MaterialIcons } from "@expo/vector-icons";
 import MyButton from "../../components/MyButton/index.jsx";
 import MyCheckBox from "../../components/MyCheckBox/index.jsx";
 import { TouchableOpacity } from "react-native";
-const Login = () => {
+
+const Login = ({ navigation }) => {
   return (
     <View
       width="100%"
@@ -24,16 +25,18 @@ const Login = () => {
       <Logo />
       <View width="80%" gap="20px">
         <MyInput
-          startIcon={<AntDesign name="user" />}
+          label="Email"
+          startIcon={<MaterialIcons name="email" />}
           fontSize="16px"
           borderRadius="20px"
-          placeholder="User name"
+          placeholder="quanglng@gmail.com"
         />
         <MyInput
+          label="Password"
           startIcon={<Entypo name="key" />}
           fontSize="16px"
           borderRadius="20px"
-          placeholder="Password"
+          placeholder="*********************"
           type="password"
         />
         <View flexDirection="row" alignItems={"center"}>
@@ -57,7 +60,7 @@ const Login = () => {
         <Text fontSize={11} fontWeight={400} color="#053B47">
           Don't have account?
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
           <Text fontSize={17} fontWeight={500} color="#053B47">
             Sign up
           </Text>

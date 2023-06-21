@@ -3,6 +3,7 @@ import { NativeBaseProvider, Text, View, extendTheme } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./src/pages/Login/index";
+import Register from "./src/pages/Register";
 const config = {
   useSystemColorMode: false,
   initialColorMode: "dark",
@@ -19,9 +20,10 @@ export default function App() {
           screenOptions={{
             headerShown: false,
           }}
-          initialRouteName="Login"
+          initialRouteName="Register"
         >
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
