@@ -4,8 +4,10 @@ import Logo from "../../assets/icon/Logo";
 import MyInput from "../../components/MyInput";
 import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import MyDatePicker from "../../components/MyDatePicker";
+import { TouchableOpacity } from "react-native";
+import MyButton from "../../components/MyButton";
 
-const Register = () => {
+const Register = ({ navigation }) => {
   return (
     <View
       width="100%"
@@ -21,7 +23,7 @@ const Register = () => {
         TR Library
       </Text>
       <Logo width={100} height={100} />
-      <View width="80%" gap="20px">
+      <View width="80%" gap="10px">
         <View display="flex" flexDirection="row" gap="8px" width="100%">
           <MyInput
             flex={1}
@@ -61,7 +63,33 @@ const Register = () => {
           placeholder="*********************"
           type="password"
         />
-        <MyDatePicker label="Birth" borderRadius="20px" />
+        <MyDatePicker
+          mode="date"
+          label="Birth"
+          borderRadius="20px"
+          paddingTop="10px"
+        />
+        <MyButton
+          text="Sign up"
+          borderRadius="90px"
+          mt="10px"
+          padding="8px 12px"
+        />
+        <View
+          ml="auto"
+          alignItems="flex-end"
+          display="flex"
+          flexDirection="column"
+        >
+          <Text fontSize={11} fontWeight={400} color="#053B47">
+            Already have an account?
+          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <Text fontSize={17} fontWeight={500} color="#053B47">
+              Sign in
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

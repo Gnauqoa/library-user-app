@@ -47,7 +47,7 @@ const Login = ({ navigation }) => {
             </Text>
           </Pressable>
         </View>
-        <MyButton text="Sign in" borderRadius="90px" />
+        <MyButton padding="8px 12px" text="Sign in" borderRadius="90px" />
       </View>
       <View
         position="absolute"

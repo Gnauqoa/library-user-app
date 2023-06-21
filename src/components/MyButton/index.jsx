@@ -4,7 +4,6 @@ import React from "react";
 const MyButton = ({ onPress, text, textProps, ...props }) => {
   return (
     <Pressable
-      {...props}
       display="flex"
       flexDirection="column"
       backgroundColor={"#FFA2AB"}
@@ -21,6 +20,7 @@ const MyButton = ({ onPress, text, textProps, ...props }) => {
         borderColor: "#9D9AA4",
         color: "#fff",
       }}
+      {...props}
     >
       <Text fontSize={16} fontWeight={700} color={"#053B47"} {...textProps}>
         {text}
