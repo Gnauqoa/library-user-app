@@ -8,11 +8,17 @@ import { searchBook } from "../../services/book";
 
 const SearchBar = ({ setResult, current_page, total_items, query }) => {
   const [name, setName] = useState("");
-  const searchRequest = useAPI({ queryFn: (payload) => searchBook(payload) });
+  const searchRequest = useAPI({
+    queryFn: (payload) => searchBook(payload),
+    test: "search",
+    getNow: true,
+  });
   const handleSearch = () => {
     searchRequest
-      .run({ name, page: current_page, per_page: 5 })
-      .then((res) => setResult({ ...res, query: name }))
+      .run({ name: name || "", page: current_page, per_page: 5 })
+      .then((res) => {
+        setResult({ ...res, query: name });
+      })
       .catch((err) => {});
   };
   useEffect(() => {

@@ -1,10 +1,14 @@
 import dayjs from "dayjs";
 import { FlatList, Image, Text, View } from "native-base";
 import React from "react";
+import { RefreshControl } from "react-native";
 
-const ResultList = ({ items }) => {
+const ResultList = ({ items, onRefresh }) => {
   return (
     <FlatList
+      refreshControl={
+        <RefreshControl refreshing={false} onRefresh={onRefresh} />
+      }
       _contentContainerStyle={{ paddingX: "20px", paddingY: "20px" }}
       flexDirection="column"
       gap="10px"

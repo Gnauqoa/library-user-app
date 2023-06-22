@@ -29,11 +29,9 @@ const Suggest = ({ clickAway }) => {
           Hold to see review
         </Text>
         <FlatList
+          showsHorizontalScrollIndicator={false}
           scrollEnabled={true}
-          _contentContainerStyle={{
-            gap: "8px",
-            alignItems: "flex-end",
-            }}
+          _contentContainerStyle={{ gap: "8px", alignItems: "flex-end" }}
           horizontal={true}
           gap="8px"
           data={suggestRequest.response.items}
