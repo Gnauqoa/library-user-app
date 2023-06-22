@@ -18,13 +18,11 @@ const Search = () => {
         width="100%"
         height="100%"
         py="32px"
-        px="20px"
-        gap="16px"
         flexDirection="column"
         backgroundColor="#FEEADF"
         position="relative"
       >
-        <Text fontSize="25px" fontWeight={700} color="#053B47">
+        <Text px="20px" fontSize="25px" fontWeight={700} color="#053B47">
           Search
         </Text>
         <SearchBar
@@ -34,12 +32,14 @@ const Search = () => {
           total_items={result.total_items}
         />
         <ResultList items={result.items} />
-        <MyPagination
-          name={"search"}
-          current_page={page}
-          total_pages={result.total_pages}
-          onChange={setPage}
-        />
+        <View paddingTop="10px" paddingX="20px"> 
+          <MyPagination
+            name={"search"}
+            current_page={page}
+            total_pages={result.total_pages}
+            onChange={setPage}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );

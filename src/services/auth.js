@@ -64,7 +64,9 @@ export const logout = () => {
     url: AUTHENTICATION_URLS.LOGOUT,
   });
 };
+
 export const login = (payload) => {
+console.log(axiosForLibraryAPI.getUri())
   return axiosForLibraryAPI
     .request({
       method: "post",

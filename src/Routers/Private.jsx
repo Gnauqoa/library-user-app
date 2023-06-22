@@ -1,7 +1,9 @@
 import React from "react";
 import Search from "../pages/Search";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Feather } from "@expo/vector-icons";
+import Home from "../pages/Home";
+
 const Tab = createBottomTabNavigator();
 
 const Private = () => {
@@ -11,8 +13,21 @@ const Private = () => {
         headerShown: false,
         tabBarShowLabel: false,
       }}
-      initialRouteName="Search"
+      initialRouteName="Home"
     >
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <Feather
+              name="home"
+              size={size}
+              color={focused ? "#FFA2AB" : "#053B47"}
+            />
+          ),
+        }}
+        name="Home"
+        component={Home}
+      />
       <Tab.Screen
         options={{
           tabBarIcon: ({ focused, color, size }) => (

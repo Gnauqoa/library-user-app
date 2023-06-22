@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import useAPI from "../../hooks/useApi";
 import BackDropProcess from "../../components/BackDropProcess";
-import { searchBook } from "../../services/search";
+import { searchBook } from "../../services/book";
 
 const SearchBar = ({ setResult, current_page, total_items, query }) => {
   const [name, setName] = useState("");
@@ -19,7 +19,7 @@ const SearchBar = ({ setResult, current_page, total_items, query }) => {
     if (searchRequest.isFetched) handleSearch();
   }, [current_page]);
   return (
-    <View flexDirection={"column"} gap="8px">
+    <View flexDirection={"column"} gap="8px" px="20px" pt="16px">
       <View
         gap="8px"
         alignItems="center"
@@ -50,7 +50,9 @@ const SearchBar = ({ setResult, current_page, total_items, query }) => {
       </View>
       {total_items && (
         <Text fontSize={20} color="#053B47" fontWeight={600}>
-          {query ? `${total_items} result for ${query}` : `${total_items} book in library`}
+          {query
+            ? `${total_items} result for ${query}`
+            : `${total_items} book in library`}
         </Text>
       )}
     </View>

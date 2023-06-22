@@ -5,6 +5,7 @@ import React from "react";
 const ResultList = ({ items }) => {
   return (
     <FlatList
+      _contentContainerStyle={{ paddingX: "20px", paddingY: "20px" }}
       flexDirection="column"
       gap="10px"
       data={items}
@@ -32,6 +33,17 @@ const ResultItem = ({
       overflow={"hidden"}
       alignItems={"center"}
       mb="10px"
+      style={{
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 4,
+        },
+        shadowOpacity: 0.32,
+        shadowRadius: 5.46,
+
+        elevation: 9,
+      }}
     >
       <View
         flex={1}
