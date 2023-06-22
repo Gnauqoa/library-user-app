@@ -27,7 +27,12 @@ const Search = () => {
         <Text fontSize="25px" fontWeight={700} color="#053B47">
           Search
         </Text>
-        <SearchBar current_page={page} setResult={setResult} />
+        <SearchBar
+          query={result?.query}
+          current_page={page}
+          setResult={setResult}
+          total_items={result.total_items}
+        />
         <ResultList items={result.items} />
         <MyPagination
           name={"search"}

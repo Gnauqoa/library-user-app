@@ -26,9 +26,9 @@ const AutoLogin = () => {
     console.log(await getAccessToken(), await getRefreshToken());
     if (validateToken(await getRefreshToken())) {
       if (!validateToken(await getAccessToken())) {
-        console.log("get new access_token");
         getAccessTokenFromRefreshToken()
           .then((res) => {
+            console.log("login with new token");
             isLogin = true;
             getCurrentUser().then((res) => dispatch(storeUser(res.data.data)));
           })

@@ -27,6 +27,7 @@ const Login = ({ navigation }) => {
     setFormValue((prev) => ({ ...prev, [name]: value }));
   };
   const handleLogin = () => {
+    console.log("start login");
     loginRequest
       .run(formValue)
       .then((res) => {
@@ -34,7 +35,9 @@ const Login = ({ navigation }) => {
         dispatch(setLoginStatus({ isChecking: false, isLogin: true }));
         toast.success("Login success");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log("login error")
+      });
   };
   return (
     <View
