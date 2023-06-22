@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
-const Suggest = ({ clickAway }) => {
+const Suggest = ({ clickAway, navigation }) => {
   const [current_focus, setCurrentFocus] = useState(-1);
   const suggestRequest = useAPI({
     queryFn: () => searchBook({ type: "new" }),
@@ -38,6 +38,7 @@ const Suggest = ({ clickAway }) => {
           renderItem={({ item, index }) => (
             <SuggestItem
               {...item}
+              navigation={navigation}
               index={index}
               current_index={current_focus}
               setCurrentIndex={setCurrentFocus}
@@ -69,6 +70,7 @@ const SuggestItem = ({
   index,
   current_index,
   setCurrentIndex,
+  navigation,
 }) => {
   const checked = current_index === index;
   const animatedH = useState(new Animated.Value(156))[0];
@@ -103,7 +105,12 @@ const SuggestItem = ({
     }).start();
   };
   return (
-    <TouchableOpacity onPress={() => setCurrentIndex(index)}>
+    <TouchableOpacity
+      onLongPress={() => {
+        navigation.navigate("DetailsBook");
+      }}
+      onPress={() => setCurrentIndex(index)}
+    >
       <Animated.View
         style={{
           width: animatedW,

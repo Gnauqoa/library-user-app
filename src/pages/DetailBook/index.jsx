@@ -1,12 +1,8 @@
-import { Pressable, ScrollView, Text, View } from "native-base";
+import { ScrollView, View } from "native-base";
 import React, { useCallback, useState } from "react";
-import MostBorrow from "./MostBorrow";
-import Suggest from "./Suggest";
-import { useToggle } from "@uidotdev/usehooks";
 import { RefreshControl } from "react-native";
 
-const Home = ({ navigation }) => {
-  const [clickAway, toggle] = useToggle(false);
+const DetailBook = () => {
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -14,7 +10,6 @@ const Home = ({ navigation }) => {
       setRefreshing(false);
     }, 1);
   }, []);
-  if (refreshing) return <></>;
   return (
     <ScrollView
       width="100%"
@@ -29,16 +24,8 @@ const Home = ({ navigation }) => {
       refreshControl={
         <RefreshControl refreshing={false} onRefresh={onRefresh} />
       }
-    >
-      <Pressable onPress={toggle}>
-        <Text fontSize="25px" fontWeight={700} color="#053B47" pb="40px">
-          Home
-        </Text>
-        <MostBorrow />
-        <Suggest navigation={navigation} clickAway={clickAway} />
-      </Pressable>
-    </ScrollView>
+    ></ScrollView>
   );
 };
 
-export default Home;
+export default DetailBook;

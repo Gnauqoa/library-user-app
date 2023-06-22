@@ -3,10 +3,13 @@ import Search from "../pages/Search";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import Home from "../pages/Home";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import DetailBook from "../pages/DetailBook";
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-const Private = () => {
+const MainScreen = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -42,6 +45,21 @@ const Private = () => {
         component={Search}
       />
     </Tab.Navigator>
+  );
+};
+
+const Private = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+      }}
+      initialRouteName="MainScreen"
+    >
+      <Stack.Screen name="MainScreen" component={MainScreen} />
+      <Stack.Screen name="DetailsBook" component={DetailBook} />
+    </Stack.Navigator>
   );
 };
 
