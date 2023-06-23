@@ -11,7 +11,6 @@ const SearchBar = ({ setResult, current_page, total_items, query }) => {
   const searchRequest = useAPI({
     queryFn: (payload) => searchBook(payload),
     test: "search",
-    getNow: true,
   });
   const handleSearch = () => {
     searchRequest

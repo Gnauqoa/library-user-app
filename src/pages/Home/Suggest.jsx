@@ -1,4 +1,4 @@
-import { FlatList, Image, Pressable, Text, View } from "native-base";
+import { FlatList, Text, View } from "native-base";
 import React, { useEffect, useState } from "react";
 import useAPI from "../../hooks/useApi";
 import { searchBook } from "../../services/book";
@@ -9,7 +9,7 @@ import { setDetailBook } from "../../reducers/detailBookReducer";
 import BookItem from "../../components/BookItem";
 
 const Suggest = ({ clickAway, navigation }) => {
-  const [current_focus, setCurrentFocus] = useState(-1);
+  const [current_focus, setCurrentFocus] = useState(0);
   const dispatch = useDispatch();
   const suggestRequest = useAPI({
     queryFn: () => searchBook({ type: "new" }),

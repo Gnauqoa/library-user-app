@@ -80,6 +80,17 @@ const DetailBook = ({ navigation }) => {
           >
             Author: <Text fontWeight={400}> {detailBook.authors[0].name}</Text>
           </Text>
+          <Text
+            fontSize={16}
+            fontWeight={700}
+            color="#053B47"
+            textAlign={"center"}
+          >
+            Available/Total:{" "}
+            <Text fontWeight={400}>
+              {detailBook.available_book}/{detailBook.total_book}
+            </Text>
+          </Text>
           <Category />
           <Info />
           <Comment />

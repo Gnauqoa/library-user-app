@@ -5,6 +5,7 @@ import { AntDesign, Feather } from "@expo/vector-icons";
 import Home from "../pages/Home";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import DetailBook from "../pages/DetailBook";
+import User from "../pages/User";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -43,6 +44,19 @@ const MainScreen = () => {
         }}
         name="Search"
         component={Search}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <AntDesign
+              name="user"
+              size={size}
+              color={focused ? "#FFA2AB" : "#053B47"}
+            />
+          ),
+        }}
+        name="User"
+        component={User}
       />
     </Tab.Navigator>
   );

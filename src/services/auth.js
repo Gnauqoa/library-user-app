@@ -12,14 +12,14 @@ const AUTHENTICATION_URLS = {
   ACTIVITY: "/v1/user/current/activity",
   BORROWING_LIST: "/v1/user/current/borrowingBooks",
 };
-export const getActivity = (per_page, page, type, status) => {
+export const getActivity = (payload) => {
   return axiosForLibraryAPI
     .request({
       url: AUTHENTICATION_URLS.ACTIVITY,
       method: "get",
-      params: { per_page, page, type, status },
+      params: payload,
     })
-    .then((res) => res.data);
+    .then((res) => res.data.data);
 };
 export const getBorrowingList = () => {
   return axiosForLibraryAPI
@@ -66,7 +66,7 @@ export const logout = () => {
 };
 
 export const login = (payload) => {
-console.log(axiosForLibraryAPI.getUri())
+  console.log(axiosForLibraryAPI.getUri());
   return axiosForLibraryAPI
     .request({
       method: "post",
@@ -96,4 +96,13 @@ export const getCurrentUser = () => {
     .then((response) => {
       return Promise.resolve(response);
     });
+};
+export const getBorrowingBook = (payload) => {
+  return axiosForLibraryAPI
+    .request({
+      method: "get",
+      url: "/v1/user/current/borrowingBooks",
+      params: payload,
+    })
+    .then((res) => res.data.data);
 };

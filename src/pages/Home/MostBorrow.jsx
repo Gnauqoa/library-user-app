@@ -86,21 +86,19 @@ const MostBorrow = ({ navigation }) => {
             </Text>
           </Text>
           <Text fontSize={12} fontWeight={400} color="#053B47">
-            Publishing year:{" "}
+            Languages:{" "}
             <Text fontSize={12} fontWeight={700} color="#053B47">
-              {dayjs(
-                mostBorrowRequest?.response?.items[0]?.release_date
-              ).format("DD/MM/YYYY")}
+              {mostBorrowRequest?.response?.items[0]?.languages[0]}
+              {mostBorrowRequest?.response?.items[0]?.languages.slice(1).map((language) => `, ${language}`)}
             </Text>
           </Text>
-          {mostBorrowRequest?.response?.items[0]?.publisher && (
-            <Text fontSize={12} fontWeight={400} color="#053B47">
-              Publisher{" "}
-              <Text fontSize={12} fontWeight={700} color="#053B47">
-                {mostBorrowRequest?.response?.items[0]?.publisher?.name}
-              </Text>
+          <Text fontSize={12} fontWeight={400} color="#053B47">
+            Available/Total::{" "}
+            <Text fontSize={12} fontWeight={700} color="#053B47">
+              {mostBorrowRequest?.response?.items[0]?.available_book}/
+              {mostBorrowRequest?.response?.items[0]?.total_book}
             </Text>
-          )}
+          </Text>
         </View>
       </View>
     </View>

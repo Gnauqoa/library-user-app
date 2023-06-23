@@ -32,6 +32,8 @@ const ResultItem = ({
   categories,
   languages,
   onPress,
+  available_book,
+  total_book,
 }) => {
   return (
     <View
@@ -90,6 +92,12 @@ const ResultItem = ({
           <Text fontSize={12} fontWeight={700} color="#053B47">
             {categories[0]}
             {categories.slice(1, 3).map((category) => `, ${category}`)}
+          </Text>
+        </Text>
+        <Text fontSize={12} fontWeight={400} color="#053B47">
+          Available/Total:{" "}
+          <Text fontSize={12} fontWeight={700} color="#053B47">
+            {available_book}/{total_book}
           </Text>
         </Text>
         <Text fontSize={12} fontWeight={400} color="#053B47">
