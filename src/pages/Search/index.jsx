@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 import ResultList from "./ResultList";
 import MyPagination from "../../components/MyPagination";
 
-const Search = () => {
+const Search = ({ navigation }) => {
   const [result, setResult] = useState({
     items: [],
     total_pages: 0,
@@ -30,7 +30,7 @@ const Search = () => {
         setResult={setResult}
         total_items={result.total_items}
       />
-      <ResultList items={result.items} onRefresh={onRefresh} />
+      <ResultList items={result.items} navigation={navigation} />
       <View paddingTop="10px" paddingX="20px">
         <MyPagination
           name={"search"}

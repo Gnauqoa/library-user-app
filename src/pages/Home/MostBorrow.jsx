@@ -4,12 +4,21 @@ import useAPI from "../../hooks/useApi";
 import { searchBook } from "../../services/book";
 import BackDropProcess from "../../components/BackDropProcess";
 import dayjs from "dayjs";
+import { TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
+import { setDetailBook } from "../../reducers/detailBookReducer";
 
-const MostBorrow = () => {
+const MostBorrow = ({ navigation }) => {
   const mostBorrowRequest = useAPI({
     queryFn: () => searchBook({ type: "new", per_page: 1, page: 1 }),
     getNow: true,
   });
+  const dispatch = useDispatch();
+  const handleWatchDetail = () => {
+    navigation.navigate("DetailsBook");
+    console.log(mostBorrowRequest.response);
+    dispatch(setDetailBook(mostBorrowRequest.response.items[0]));
+  };
   if (!mostBorrowRequest.isFetched)
     return <BackDropProcess open={mostBorrowRequest.loading} />;
   return (
@@ -18,7 +27,6 @@ const MostBorrow = () => {
         Most borrowed book
       </Text>
       <View
-        // overflow="visible"
         borderRadius="12px"
         backgroundColor="#FFDCD5"
         p="8px"
@@ -26,43 +34,37 @@ const MostBorrow = () => {
         flexDirection="row"
         gap="8px"
         alignItems={"center"}
-        // mb="10px"
       >
-        <View
-          flex={1}
-          w="105px"
-          h="150px"
-          borderRadius="18px"
-          // top="-24px"
-          // overflow={"hidden"}
-        >
-          <View
-            borderRadius={12}
-            top="-32px"
-            w="100%"
-            h="180px"
-            style={{
-              shadowColor: "#000",
-              shadowOffset: {
-                width: 0,
-                height: 9,
-              },
-              shadowOpacity: 0.48,
-              shadowRadius: 11.95,
-
-              elevation: 18,
-            }}
-            overflow={"hidden"}
-          >
-            <Image
+        <View flex={1} w="105px" h="150px" borderRadius="18px">
+          <TouchableOpacity onPress={handleWatchDetail}>
+            <View
               borderRadius={12}
+              top="-32px"
               w="100%"
-              h="100%"
-              resizeMode="contain"
-              source={{ uri: mostBorrowRequest?.response?.items[0]?.img_url }}
-              alt="book cover"
-            />
-          </View>
+              h="180px"
+              style={{
+                shadowColor: "#000",
+                shadowOffset: {
+                  width: 0,
+                  height: 9,
+                },
+                shadowOpacity: 0.48,
+                shadowRadius: 11.95,
+
+                elevation: 18,
+              }}
+              overflow={"hidden"}
+            >
+              <Image
+                borderRadius={12}
+                w="100%"
+                h="100%"
+                resizeMode="contain"
+                source={{ uri: mostBorrowRequest?.response?.items[0]?.img_url }}
+                alt="book cover"
+              />
+            </View>
+          </TouchableOpacity>
         </View>
         <View flexDirection="column" flex={2}>
           <Text fontSize={18} fontWeight={700} color="#053B47">

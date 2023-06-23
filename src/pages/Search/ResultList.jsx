@@ -1,19 +1,25 @@
-import dayjs from "dayjs";
 import { FlatList, Image, Text, View } from "native-base";
 import React from "react";
-import { RefreshControl } from "react-native";
+import { RefreshControl, TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
+import { setDetailBook } from "../../reducers/detailBookReducer";
 
-const ResultList = ({ items, onRefresh }) => {
+const ResultList = ({ items, navigation }) => {
+  const dispatch = useDispatch();
+  const handleWatchDetail = (data) => {
+    dispatch(setDetailBook(data));
+    navigation.navigate("DetailsBook");
+  };
   return (
     <FlatList
-      refreshControl={
-        <RefreshControl refreshing={false} onRefresh={onRefresh} />
-      }
+      refreshControl={<RefreshControl refreshing={false} />}
       _contentContainerStyle={{ paddingX: "20px", paddingY: "20px" }}
       flexDirection="column"
       gap="10px"
       data={items}
-      renderItem={({ item }) => <ResultItem {...item} />}
+      renderItem={({ item }) => (
+        <ResultItem {...item} onPress={() => handleWatchDetail(item)} />
+      )}
       keyExtractor={(item) => item.id}
     />
   );
@@ -23,14 +29,14 @@ const ResultItem = ({
   img_url,
   name,
   authors,
-  release_date,
-  publisher,
   categories,
+  languages,
+  onPress,
 }) => {
   return (
     <View
       borderRadius="12px"
-      backgroundColor="#b4d8bf"
+      backgroundColor="#FFDCD5"
       p="8px"
       flexDirection="row"
       gap="12px"
@@ -54,15 +60,20 @@ const ResultItem = ({
         w="105px"
         h="156px"
         overflow={"hidden"}
+        justifyItems={"center"}
+        justifyContent={"center"}
         borderRadius="12px"
       >
-        <Image
-          w="100%"
-          h="100%"
-          resizeMode="contain"
-          source={{ uri: img_url }}
-          alt="book cover"
-        />
+        <TouchableOpacity onPress={onPress}>
+          <Image
+            w="105px"
+            h="100%"
+            resizeMode="contain"
+            source={{ uri: img_url }}
+            alt="book cover"
+            borderRadius={12}
+          />
+        </TouchableOpacity>
       </View>
       <View flexDirection="column" flex={2}>
         <Text fontSize={18} fontWeight={700} color="#053B47">
@@ -77,24 +88,17 @@ const ResultItem = ({
         <Text fontSize={12} fontWeight={400} color="#053B47">
           Tag:{" "}
           <Text fontSize={12} fontWeight={700} color="#053B47">
-            {categories[0] +
-              categories.slice(1, 3).map((category) => `, ${category}`)}
+            {categories[0]}
+            {categories.slice(1, 3).map((category) => `, ${category}`)}
           </Text>
         </Text>
         <Text fontSize={12} fontWeight={400} color="#053B47">
-          Publishing year:{" "}
+          Languages:{" "}
           <Text fontSize={12} fontWeight={700} color="#053B47">
-            {dayjs(release_date).format("DD/MM/YYYY")}
+            {languages[0]}
+            {languages.slice(1).map((language) => `, ${language}`)}
           </Text>
         </Text>
-        {publisher && (
-          <Text fontSize={12} fontWeight={400} color="#053B47">
-            Publisher{" "}
-            <Text fontSize={12} fontWeight={700} color="#053B47">
-              {publisher?.name}
-            </Text>
-          </Text>
-        )}
       </View>
     </View>
   );

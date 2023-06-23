@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const BookCover = () => {
   const detailBook = useSelector((state) => state.detailBook);
   return (
-    <View position={"relative"} h="380px" alignItems={"center"}>
+    <View top="-1px" position={"relative"} h="380px" alignItems={"center"}>
       <View w="100%" h="320px">
         <Image
           alt="book cover"

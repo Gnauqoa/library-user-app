@@ -34,7 +34,7 @@ const Home = ({ navigation }) => {
         <Text fontSize="25px" fontWeight={700} color="#053B47" pb="40px">
           Home
         </Text>
-        <MostBorrow />
+        <MostBorrow navigation={navigation} />
         <Suggest navigation={navigation} clickAway={clickAway} />
       </Pressable>
     </ScrollView>
