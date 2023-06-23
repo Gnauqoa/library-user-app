@@ -13,7 +13,7 @@ const BookCover = () => {
           h="100%"
           source={{ uri: detailBook.img_url }}
           zIndex={1}
-          blurRadius={2}
+          blurRadius={3}
         />
       </View>
       <View

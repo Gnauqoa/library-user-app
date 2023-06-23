@@ -9,6 +9,10 @@ import Info from "./Info";
 import Comment from "./Comment";
 import { useToggle } from "@uidotdev/usehooks";
 import Recommend from "./Recommand";
+import useAPI from "../../hooks/useApi";
+import { getBook } from "../../services/book";
+import { setDetailBook } from "../../reducers/detailBookReducer";
+import BackDropProcess from "../../components/BackDropProcess";
 
 const DetailBook = ({ navigation }) => {
   const [clickAway, toggle] = useToggle(false);
@@ -16,18 +20,26 @@ const DetailBook = ({ navigation }) => {
   const detailBook = useSelector((state) => state.detailBook);
   const [refreshing, setRefreshing] = useState(false);
   const scrollViewRef = useRef();
+  const getBookRequest = useAPI({ queryFn: (book_id) => getBook(book_id) });
   const handleChooseNew = () => {
     scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: false });
   };
   const onRefresh = useCallback(() => {
     setRefreshing(true);
+    getBookRequest
+      .run(detailBook.id)
+      .then((res) => {
+        dispatch(setDetailBook(res));
+      })
+      .catch((err) => {});
     setTimeout(() => {
       setRefreshing(false);
-    }, 1);
+    }, 0);
   }, []);
 
   return (
     <SafeAreaView>
+      <BackDropProcess open={getBookRequest.loading} />
       <ScrollView
         ref={scrollViewRef}
         width="100%"
