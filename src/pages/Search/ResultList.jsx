@@ -94,9 +94,17 @@ const ResultItem = ({
             {categories.slice(1, 3).map((category) => `, ${category}`)}
           </Text>
         </Text>
-        <Text fontSize={12} fontWeight={400} color="#053B47">
+        <Text
+          fontSize={12}
+          fontWeight={400}
+          color={!available_book ? "#F00" : "#053B47"}
+        >
           Available/Total:{" "}
-          <Text fontSize={12} fontWeight={700} color="#053B47">
+          <Text
+            fontSize={12}
+            fontWeight={700}
+            color={!available_book ? "#F00" : "#053B47"}
+          >
             {available_book}/{total_book}
           </Text>
         </Text>

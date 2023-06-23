@@ -21,7 +21,7 @@ const MainScreen = () => {
     >
       <Tab.Screen
         options={{
-          tabBarIcon: ({ focused, color, size }) => (
+          tabBarIcon: ({ focused, size }) => (
             <Feather
               name="home"
               size={size}

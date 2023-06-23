@@ -8,8 +8,9 @@ import { logout } from "../../services/auth";
 import useCustomToast from "../../hooks/useCustomToast";
 import { setLoginStatus } from "../../reducers/loginStatusReducer";
 import BackDropProcess from "../../components/BackDropProcess";
+import IconCrown from "../../assets/img/Crown";
 
-const Introduce = ({ navigation }) => {
+const Introduce = () => {
   const logoutRequest = useAPI({ queryFn: logout });
   const currentUser = useSelector((state) => state.currentUser);
   const toast = useCustomToast();
@@ -38,7 +39,6 @@ const Introduce = ({ navigation }) => {
           </View>
         </TouchableOpacity>
       </View>
-
       <Image
         zIndex={0}
         w="100%"
@@ -52,11 +52,15 @@ const Introduce = ({ navigation }) => {
           w={130}
           h={130}
           zIndex={20}
-          overflow={"hidden"}
           borderWidth={"1px"}
           borderColor={"#fff"}
           borderRadius={900}
         >
+          {currentUser.type === "Loyal" || currentUser.type === "loyal" ? (
+            <IconCrown position={"absolute"} zIndex={20} bottom={5} right={5} />
+          ) : (
+            <></>
+          )}
           {currentUser?.avatar_url ? (
             <Image
               w="100%"

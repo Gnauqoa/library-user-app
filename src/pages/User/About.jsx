@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 
 const About = ({ total_borrowing }) => {
   const currentUser = useSelector((state) => state.currentUser);
-
   return (
     <View flexDirection={"column"} gap="20px">
       <View
@@ -56,15 +55,21 @@ const About = ({ total_borrowing }) => {
           value={currentUser.address}
           icon={<Entypo name="address" />}
         />
+        <ShowText
+          title={"Unpaid fine"}
+          color={currentUser.unpaid_fine ? "#F00" : "#039C00"}
+          value={currentUser.unpaid_fine}
+          icon={<MaterialIcons name="attach-money" />}
+        />
       </View>
     </View>
   );
 };
-const ShowText = ({ icon, title, value }) => {
+const ShowText = ({ icon, title, value, color }) => {
   return (
     <View flexDirection={"row"} gap="16px" alignItems={"center"}>
-      <Icon as={icon} size={5} color="#053B47" />
-      <Text color="#053B47" fontWeight={700} fontSize={14}>
+      <Icon as={icon} size={5} color={color || "#053B47"} />
+      <Text color={color || "#053B47"} fontWeight={700} fontSize={14}>
         {title}: <Text fontWeight={400}>{value}</Text>
       </Text>
     </View>
