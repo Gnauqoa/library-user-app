@@ -1,12 +1,8 @@
-import { ScrollView, Text, View } from "native-base";
+import { Text, View } from "native-base";
 import React, { useState } from "react";
-import { SafeAreaView } from "react-native";
 import SearchBar from "./SearchBar";
 import ResultList from "./ResultList";
 import MyPagination from "../../components/MyPagination";
-import { RefreshControl } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { setRefreshPage } from "../../reducers/refreshPage";
 
 const Search = () => {
   const [result, setResult] = useState({
@@ -15,11 +11,7 @@ const Search = () => {
     current_page: 0,
   });
   const [page, setPage] = useState(1);
-  const refreshPage = useSelector((state) => state.refreshPage);
-  const dispatch = useDispatch();
-  const onRefresh = () => {
-    dispatch(setRefreshPage({ refreshing: !refreshPage.refreshing }));
-  };
+
   return (
     <View
       width="100%"

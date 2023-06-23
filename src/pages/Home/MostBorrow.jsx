@@ -18,26 +18,29 @@ const MostBorrow = () => {
         Most borrowed book
       </Text>
       <View
-        overflow="visible"
+        // overflow="visible"
         borderRadius="12px"
         backgroundColor="#FFDCD5"
         p="8px"
+        mt={2}
         flexDirection="row"
         gap="8px"
         alignItems={"center"}
-        mb="10px"
+        // mb="10px"
       >
         <View
           flex={1}
           w="105px"
-          h="180px"
+          h="150px"
           borderRadius="18px"
-          top="-24px"
-          overflow={"hidden"}
+          // top="-24px"
+          // overflow={"hidden"}
         >
           <View
+            borderRadius={12}
+            top="-32px"
             w="100%"
-            h="100%"
+            h="180px"
             style={{
               shadowColor: "#000",
               shadowOffset: {
@@ -52,6 +55,7 @@ const MostBorrow = () => {
             overflow={"hidden"}
           >
             <Image
+              borderRadius={12}
               w="100%"
               h="100%"
               resizeMode="contain"

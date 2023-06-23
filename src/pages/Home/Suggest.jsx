@@ -3,18 +3,25 @@ import React, { useEffect, useState } from "react";
 import useAPI from "../../hooks/useApi";
 import { searchBook } from "../../services/book";
 import BackDropProcess from "../../components/BackDropProcess";
-import {
-  Animated,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
+import { useDispatch } from "react-redux";
+import { setDetailBook } from "../../reducers/detailBookReducer";
+import BookItem from "../../components/BookItem";
 
 const Suggest = ({ clickAway, navigation }) => {
   const [current_focus, setCurrentFocus] = useState(-1);
+  const dispatch = useDispatch();
   const suggestRequest = useAPI({
     queryFn: () => searchBook({ type: "new" }),
     getNow: true,
   });
+  const handleLongPress = (data) => {
+    dispatch(setDetailBook(data));
+    navigation.navigate("DetailsBook");
+  };
+  const handlePress = (index) => {
+    setCurrentFocus(index);
+  };
   useEffect(() => {
     setCurrentFocus(-1);
   }, [clickAway]);
@@ -25,8 +32,8 @@ const Suggest = ({ clickAway, navigation }) => {
         <Text fontSize={18} fontWeight={700} color="#053B47">
           Just for you
         </Text>
-        <Text fontSize={14} fontWeight={400} color="#9d9d9d" pb="20px">
-          Hold to see review
+        <Text fontSize={14} fontWeight={400} color="#9d9d9d" pb="10px">
+          Hold to see detail
         </Text>
         <FlatList
           showsHorizontalScrollIndicator={false}
@@ -36,12 +43,11 @@ const Suggest = ({ clickAway, navigation }) => {
           gap="8px"
           data={suggestRequest.response.items}
           renderItem={({ item, index }) => (
-            <SuggestItem
-              {...item}
-              navigation={navigation}
-              index={index}
-              current_index={current_focus}
-              setCurrentIndex={setCurrentFocus}
+            <BookItem
+              onLongPress={() => handleLongPress(item)}
+              img_url={item.img_url}
+              onPress={() => handlePress(index)}
+              checked={current_focus === index}
             />
           )}
         />
@@ -64,68 +70,5 @@ const Description = ({ name, description }) => {
     </View>
   );
 };
-const SuggestItem = ({
-  img_url,
-  id,
-  index,
-  current_index,
-  setCurrentIndex,
-  navigation,
-}) => {
-  const checked = current_index === index;
-  const animatedH = useState(new Animated.Value(156))[0];
-  const animatedW = useState(new Animated.Value(105))[0];
-  useEffect(() => {
-    if (checked) handleFocus();
-    else handleBlur();
-  }, [checked]);
-  const handleFocus = () => {
-    Animated.timing(animatedH, {
-      toValue: 190,
-      duration: 150,
-      useNativeDriver: false,
-    }).start();
-    Animated.timing(animatedW, {
-      toValue: 120,
-      duration: 150,
-      useNativeDriver: false,
-    }).start();
-  };
 
-  const handleBlur = () => {
-    Animated.timing(animatedH, {
-      toValue: 156,
-      duration: 150,
-      useNativeDriver: false,
-    }).start();
-    Animated.timing(animatedW, {
-      toValue: 105,
-      duration: 150,
-      useNativeDriver: false,
-    }).start();
-  };
-  return (
-    <TouchableOpacity
-      onLongPress={() => {
-        navigation.navigate("DetailsBook");
-      }}
-      onPress={() => setCurrentIndex(index)}
-    >
-      <Animated.View
-        style={{
-          width: animatedW,
-          height: animatedH,
-          overflow: "hidden",
-          borderRadius: 12,
-        }}
-      >
-        <Animated.Image
-          style={{ width: "100%", height: "100%" }}
-          source={{ uri: img_url }}
-          alt="book cover"
-        />
-      </Animated.View>
-    </TouchableOpacity>
-  );
-};
 export default Suggest;
